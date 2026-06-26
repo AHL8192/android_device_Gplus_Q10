@@ -1,5 +1,5 @@
 # Inherit from standard TWRP config
-$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/omni/config/common.mk)
 
 # Device identifier
 PRODUCT_DEVICE := Q10
