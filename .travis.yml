@@ -1,0 +1,62 @@
+os: linux
+dist: bionic
+language: generic
+
+env:
+  global:
+    - MANIFEST_URL="https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git"
+    - MANIFEST_BRANCH="twrp-9.0"
+    - DEVICE="Q10"
+    - OEM="Gplus"
+    - TARGET="recoveryimage"
+
+addons:
+  apt:
+    update: true
+    packages:
+      - bc
+      - bison
+      - build-essential
+      - curl
+      - flex
+      - g++-multilib
+      - gcc-multilib
+      - git
+      - gnupg
+      - gperf
+      - lib32ncurses5-dev
+      - lib32readline-dev
+      - lib32z1-dev
+      - liblz4-tool
+      - libncurses5-dev
+      - libsdl1.2-dev
+      - libssl-dev
+      - libxml2
+      - libxml2-utils
+      - lzop
+      - pngcrush
+      - rsync
+      - schedtool
+      - squashfs-tools
+      - xsltproc
+      - zip
+      - zlib1g-dev
+
+script:
+  # 1. Setup the build environment
+  - mkdir ~/twrp && cd ~/twrp
+  - git config --global user.name "Ahmadreza Alipouryan"
+  - git config --global user.email "your.email@example.com"
+  
+  # 2. Download the TWRP Source Code
+  - repo init -u $MANIFEST_URL -b $MANIFEST_BRANCH --depth=1
+  - repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
+  
+  # 3. Clone your specific device tree from GitHub
+  - git clone https://github.com/AHL8192/android_device_Gplus_Q10.git device/$OEM/$DEVICE
+  
+  # 4. Build the Recovery
+  - source build/envsetup.sh
+  - export ALLOW_MISSING_DEPENDENCIES=true
+  - lunch omni_$DEVICE-eng
+  - mka $TARGET
