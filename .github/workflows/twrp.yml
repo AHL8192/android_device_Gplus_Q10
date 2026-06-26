@@ -47,6 +47,11 @@ jobs:
           cd ~/twrp
           git clone https://github.com/AHL8192/android_device_Gplus_Q10.git device/Gplus/Q10
 
+
+      - name: Apply Compatibility Hack
+        run: |
+          sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libinfo.so.5
+
       - name: Compile Recovery
         run: |
           cd ~/twrp
