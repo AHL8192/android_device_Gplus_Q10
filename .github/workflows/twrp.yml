@@ -52,6 +52,7 @@ jobs:
           git clone https://github.com/AHL8192/android_device_Gplus_Q10.git device/Gplus/Q10
 
       - name: Compile Recovery
+        shell: bash
         run: |
           cd ~/twrp
           export ALLOW_MISSING_DEPENDENCIES=true
