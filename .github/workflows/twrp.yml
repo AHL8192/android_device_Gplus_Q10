@@ -67,9 +67,8 @@ jobs:
           mka recoveryimage
 
 
-
       - name: Upload Recovery Image
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: TWRP-Recovery-Q10
           path: /github/home/twrp/out/target/product/Q10/recovery.img
