@@ -1,0 +1,42 @@
+LOCAL_PATH := device/Gplus/Q10
+
+# Architecture (32-bit OS on 64-bit CPU)
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
+
+
+# Platform
+TARGET_BOARD_PLATFORM := mt6761
+
+# Kernel details (Extracted from stock recovery)
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt_kernel
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32S1,32S1 buildvariant=user
+BOARD_KERNEL_BASE := 0x40000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x11b00000
+BOARD_KERNEL_TAGS_OFFSET := 0x07880000
+BOARD_BOOT_HEADER_VERSION := 1
+
+# DTBO
+BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/recovery_dtbo
+BOARD_INCLUDE_RECOVERY_DTBO := true
+
+# System as Root (Android 9 Requirement)
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+
+# Android Verified Boot (AVB 2.0)
+BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS := --flags 2
+
+# TWRP Specific UI & Features
+TW_THEME := portrait_hdpi
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 120
